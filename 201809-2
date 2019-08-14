@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int n;
+int a1[2010],a2[2010];
+int b1[2010],b2[2010];
+
+int main()
+{
+	scanf("%d",&n);
+	for(int i = 0; i < n; i++)
+		scanf("%d%d",&a1[i],&a2[i]);
+	for(int i = 0; i < n; i++)
+		scanf("%d%d",&b1[i],&b2[i]);
+
+	int s=0;
+	int p=0,q=0;
+	while(p < n && q < n){//a的起始位置在b起始右边
+		int x1 = a1[p],y1 = a2[p];
+		int x2 = b1[q],y2 = b2[q];
+
+		if(y2 <= x1){
+			q++;
+		}else if(x2 <= x1 && x1 <= y2 && y2 <= y1){
+			s += y2 - x1;
+			q++;
+		}else if(x2 <= x1 && y1 <= y2){
+			s += y1 - x1;
+			p++;
+		}else if(x1 <= x2 && y2 <= y1){
+			s += y2 - x2;
+			q++;
+		}else if(x1 <= x2 && x2 <= y1 && y1 <= y2){
+			s += y1 - x2;
+			p++;
+		}else if(y1 <= x2){
+			p++;
+		}
+
+
+		//printf("%d %d %d\n",p,q,s);
+	}
+	printf("%d\n",s);
+
+	return 0;
+}
+
+
+
+
+
+
+
